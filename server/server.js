@@ -109,13 +109,20 @@ app.get('/api/messages', async (req, res) => {
   }
 });
 
-mongoose
-  .connect(MONGODB_URI)
-  .then(() => {
-    console.log('MongoDB connected');
-    app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
-  })
-  .catch((err) => {
-    console.error('MongoDB connection failed:', err.message);
-    process.exit(1);
+if (!MONGODB_URI) {
+  console.error('MONGODB_URI is missing. Add it in Railway > Variables.');
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT} (MongoDB not configured)`);
   });
+} else {
+  mongoose
+    .connect(MONGODB_URI)
+    .then(() => {
+      console.log('MongoDB connected');
+      app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+    })
+    .catch((err) => {
+      console.error('MongoDB connection failed:', err.message);
+      app.listen(PORT, () => console.log(`Server running on port ${PORT} (MongoDB unavailable)`));
+    });
+}
