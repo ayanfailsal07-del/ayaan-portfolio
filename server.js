@@ -1,5 +1,5 @@
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
+require('dotenv').config({ path: path.join(__dirname, 'server', '.env') });
 const dns = require('dns');
 try {
   dns.setServers(['8.8.8.8', '1.1.1.1']);
@@ -10,12 +10,12 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
-const Message = require('./models/Message');
+const Message = require('./server/models/Message');
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 const MONGODB_URI = process.env.MONGODB_URI;
-const PUBLIC_DIR = path.join(__dirname, '..');
+const PUBLIC_DIR = __dirname;
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
