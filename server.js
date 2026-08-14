@@ -113,20 +113,15 @@ app.get('/api/messages', async (req, res) => {
   }
 });
 
-if (!MONGODB_URI) {
-  console.error('MONGODB_URI is missing. Add it in Railway > Variables.');
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT} (MongoDB not configured)`);
-  });
-} else {
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+if (MONGODB_URI) {
   mongoose
-    .connect(MONGODB_URI)
-    .then(() => {
-      console.log('MongoDB connected');
-      app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
-    })
-    .catch((err) => {
-      console.error('MongoDB connection failed:', err.message);
-      app.listen(PORT, () => console.log(`Server running on port ${PORT} (MongoDB unavailable)`));
-    });
+    .connect(MONGODB_URI, { serverSelectionTimeoutMS: 15000 })
+    .then(() => console.log('MongoDB connected'))
+    .catch((err) => console.error('MongoDB connection failed:', err.message));
+} else {
+  console.error('MONGODB_URI is missing. Contact form storage/email will be limited.');
 }
