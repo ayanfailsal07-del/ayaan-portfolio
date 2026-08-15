@@ -641,3 +641,119 @@ window.addEventListener('scroll', () => {
 backToTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// ===========================
+// THEME COLOR PICKER
+// ===========================
+const THEME_PRESETS = [
+  { name: 'Gold',     hex: '#c9a84c', hex2: '#e8c97a' },
+  { name: 'Orange',   hex: '#f97316', hex2: '#fb923c' },
+  { name: 'Red',      hex: '#ef4444', hex2: '#f87171' },
+  { name: 'Pink',     hex: '#ec4899', hex2: '#f472b6' },
+  { name: 'Purple',   hex: '#8b5cf6', hex2: '#a78bfa' },
+  { name: 'Blue',     hex: '#3b82f6', hex2: '#60a5fa' },
+  { name: 'Cyan',     hex: '#06b6d4', hex2: '#22d3ee' },
+  { name: 'Green',    hex: '#22c55e', hex2: '#4ade80' },
+  { name: 'Lime',     hex: '#84cc16', hex2: '#a3e635' },
+  { name: 'Teal',     hex: '#14b8a6', hex2: '#2dd4bf' }
+];
+
+const themePanel = document.getElementById('themePanel');
+const themeOverlay = document.getElementById('themeOverlay');
+const themePickerBtn = document.getElementById('themePickerBtn');
+const themePanelClose = document.getElementById('themePanelClose');
+const themeSwatches = document.getElementById('themeSwatches');
+const themeCustomInput = document.getElementById('themeCustomInput');
+const themeCustomBtn = document.getElementById('themeCustomBtn');
+
+function hexToRgb(hex) {
+  let h = hex.replace('#', '');
+  if (h.length === 3) h = h.split('').map(c => c + c).join('');
+  const num = parseInt(h, 16);
+  return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
+}
+
+function lightenHex(hex, amt) {
+  const [r, g, b] = hexToRgb(hex).map(v => Math.min(255, Math.round(v + (255 - v) * amt)));
+  return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+}
+
+function applyThemeColor(hex) {
+  if (!/^#[0-9a-fA-F]{3}$|^#[0-9a-fA-F]{6}$/.test(hex)) return false;
+  const root = document.documentElement;
+  const rgb = hexToRgb(hex).join(', ');
+  const light = lightenHex(hex, 0.35);
+  root.style.setProperty('--accent', hex);
+  root.style.setProperty('--accent2', light);
+  root.style.setProperty('--accent-rgb', rgb);
+  localStorage.setItem('themeColor', hex);
+  markActiveSwatch(hex);
+  return true;
+}
+
+function markActiveSwatch(hex) {
+  const target = hex.toLowerCase();
+  document.querySelectorAll('.theme-swatch').forEach(s => {
+    s.classList.toggle('active', s.dataset.hex === target);
+  });
+}
+
+function renderSwatches() {
+  themeSwatches.innerHTML = '';
+  THEME_PRESETS.forEach(p => {
+    const sw = document.createElement('div');
+    sw.className = 'theme-swatch';
+    sw.dataset.hex = p.hex.toLowerCase();
+    sw.innerHTML = `<span class="theme-swatch-dot" style="background:${p.hex}"></span><span class="theme-swatch-code">${p.hex}</span>`;
+    sw.addEventListener('click', () => {
+      applyThemeColor(p.hex);
+    });
+    themeSwatches.appendChild(sw);
+  });
+}
+
+if (themePanel && themeSwatches) {
+  renderSwatches();
+
+  const savedColor = localStorage.getItem('themeColor');
+  if (savedColor) {
+    applyThemeColor(savedColor);
+  } else {
+    markActiveSwatch('#c9a84c');
+  }
+
+  const openPanel = () => {
+    themePanel.classList.add('open');
+    themeOverlay.classList.add('show');
+    themeCustomInput.value = '';
+  };
+  const closePanel = () => {
+    themePanel.classList.remove('open');
+    themeOverlay.classList.remove('show');
+  };
+
+  themePickerBtn.addEventListener('click', openPanel);
+  themePanelClose.addEventListener('click', closePanel);
+  themeOverlay.addEventListener('click', closePanel);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePanel();
+  });
+
+  const applyCustom = () => {
+    let val = themeCustomInput.value.trim();
+    if (!val.startsWith('#')) val = '#' + val;
+    if (applyThemeColor(val)) {
+      themeCustomInput.style.borderColor = 'var(--accent)';
+      setTimeout(() => { themeCustomInput.style.borderColor = ''; }, 1200);
+    } else {
+      themeCustomInput.style.borderColor = '#ef4444';
+      setTimeout(() => { themeCustomInput.style.borderColor = ''; }, 1200);
+    }
+  };
+
+  themeCustomBtn.addEventListener('click', applyCustom);
+  themeCustomInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') applyCustom();
+  });
+}

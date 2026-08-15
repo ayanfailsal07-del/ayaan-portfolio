@@ -1516,6 +1516,28 @@
     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 20V5m0 0l-6 6m6-6l6 6"/><path d="M12 20V5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 11l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
 
+  <button class="theme-picker-btn" id="themePickerBtn" aria-label="Choose theme color" title="Choose theme color">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 3a9 9 0 0 0 0 18h2a1.5 1.5 0 0 0 0-3h-1.5a1.5 1.5 0 0 1 0-3H14a2 2 0 0 0 0-4h-1.5a1.5 1.5 0 0 1 0-3H13A1.5 1.5 0 0 0 12 3zm0 3a6 6 0 1 1 0 12V6z" transform="translate(0 -1)"/></svg>
+  </button>
+
+  <div class="theme-panel" id="themePanel">
+    <div class="theme-panel-head">
+      <h4>Theme Color</h4>
+      <button class="theme-panel-close" id="themePanelClose" aria-label="Close">&times;</button>
+    </div>
+    <p class="theme-panel-sub">Choose a color, or type any hex code below</p>
+    <div class="theme-swatches" id="themeSwatches"></div>
+    <div class="theme-custom">
+      <label for="themeCustomInput">Custom Color Code</label>
+      <div class="theme-custom-row">
+        <input type="text" id="themeCustomInput" placeholder="#c9a84c" maxlength="7" spellcheck="false" />
+        <button class="theme-custom-btn" id="themeCustomBtn">Apply</button>
+      </div>
+      <p class="theme-custom-hint">e.g. #ff5733, #3498db, #9b59b6</p>
+    </div>
+  </div>
+  <div class="theme-overlay" id="themeOverlay"></div>
+
   <script src="js/script.js"></script>
 </body>
 </html>
