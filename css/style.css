@@ -2213,6 +2213,11 @@ img { max-width: 100%; display: block; }
 =========================== */
 @media (max-width: 992px) {
   .hero-photo { width: 300px; height: 300px; }
+  .hero { gap: 2rem; }
+  .nav-links { gap: 1.4rem; }
+  .nav-links a { font-size: 0.78rem; }
+  .badge-right { right: -30px; }
+  .badge-left { left: -30px; }
 }
 
 @media (max-width: 768px) {
@@ -2299,6 +2304,70 @@ img { max-width: 100%; display: block; }
   .testimonials h2,
   .contact h2 { font-size: 2.2rem; }
   .testimonial-quote { font-size: 1.15rem; }
+}
+
+/* --- Small phones (< 480px) --- */
+@media (max-width: 480px) {
+  .navbar { padding: 0.9rem 5%; }
+  .nav-links { width: 82%; max-width: none; }
+  .nav-logo { font-size: 1.3rem; }
+  .hero { padding: 6.5rem 5% 3rem; gap: 1.8rem; }
+  .hero-photo { width: 170px; height: 170px; }
+  .hero-badge { padding: 0.45rem 0.6rem; gap: 0.35rem; }
+  .badge-logo { width: 20px; height: 20px; }
+  .hero-badge strong { font-size: 0.85rem; }
+  .hero-badge span { font-size: 0.56rem; }
+  .hero-name { font-size: clamp(1.7rem, 7.5vw, 2.6rem); }
+  .hero-tagline { font-size: 1rem; }
+  .hero-rotating { font-size: 1.35rem; }
+  .hero-comment { font-size: 1rem; }
+  .hero-btns { gap: 0.7rem; }
+  .hero-btns .btn { padding: 0.7rem 1.4rem; font-size: 0.8rem; }
+  .hero-socials { gap: 0.7rem; }
+  .social-box { width: 44px; height: 44px; }
+  .hero-stats { gap: 1.2rem; }
+  .hero-stats .stat-num { font-size: 1.5rem; }
+  .hstat-suffix { font-size: 1.1rem; }
+  .stats-strip { padding: 2.5rem 5%; gap: 1.2rem; }
+  .stat-num { font-size: 2.2rem; }
+  .stat-suffix { font-size: 1.4rem; }
+  section,
+  .about,
+  .skills,
+  .education,
+  .services,
+  .projects,
+  .testimonials,
+  .contact { padding: 4.5rem 5%; }
+  .section-label { letter-spacing: 3px; }
+  .about-h2 { font-size: 2rem; }
+  .about-desc { font-size: 1rem; }
+  .oval-btn { font-size: 0.72rem; padding: 0.4rem 0.35rem; }
+  .desk-scene { width: 280px; height: 320px; }
+  .scene-table { top: 210px; }
+  .table-top { height: 62px; }
+  .table-front { top: 62px; bottom: 28px; }
+  .table-leg { height: 28px; width: 17px; }
+  .leg-left { left: 18px; }
+  .leg-right { right: 18px; }
+  .laptop-mockup { transform: translateX(-50%) scale(0.5); bottom: 44px; }
+  .skill-card { padding: 3rem 1.6rem; }
+  .skill-card h3 { font-size: 2rem; }
+  .skill-icon { font-size: 4rem; }
+  .journey-slide { padding: 1.8rem 1.2rem; }
+  .service-card { padding: 2.5rem 1.5rem; }
+  .testimonial-slide { padding: 2.5rem 1.4rem; }
+  .testimonial-quote { font-size: 1.05rem; }
+  .ach-grid { grid-template-columns: 1fr; }
+  .cj-graph { gap: 3px; }
+  .cj-scale { flex-wrap: wrap; }
+  .steps-track { grid-template-columns: 1fr; gap: 2rem; }
+  .steps-line { display: none; }
+  .contact-grid { gap: 2rem; }
+  .contact-info .whatsapp-btn { width: 100%; text-align: center; }
+  .form-btn { width: 100%; }
+  .footer { padding: 2.5rem 5%; }
+  .footer-social a { width: 38px; height: 38px; }
 }
 
 /* ===========================

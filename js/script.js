@@ -330,6 +330,11 @@ function nextSlide() {
   showSlide(tIndex);
 }
 
+function prevSlide() {
+  tIndex = (tIndex - 1 + slides.length) % slides.length;
+  showSlide(tIndex);
+}
+
 function startTestimonials() {
   clearInterval(tTimer);
   tTimer = setInterval(nextSlide, 3000);
@@ -342,6 +347,11 @@ tDots.forEach((d, i) => {
     startTestimonials();
   });
 });
+
+const tPrevBtn = document.getElementById('tPrevBtn');
+const tNextBtn = document.getElementById('tNextBtn');
+if (tPrevBtn) tPrevBtn.addEventListener('click', () => { prevSlide(); startTestimonials(); });
+if (tNextBtn) tNextBtn.addEventListener('click', () => { nextSlide(); startTestimonials(); });
 
 if (slides.length) {
   showSlide(0);
@@ -407,10 +417,15 @@ function startTechAuto() {
   }, 3000);
 }
 
+const techPrevBtn = document.getElementById('techPrevBtn');
+const techNextBtn = document.getElementById('techNextBtn');
+
 if (techSlides.length) {
   techDots.forEach((d, i) => {
     d.addEventListener('click', () => { techGoTo(i); startTechAuto(); });
   });
+  if (techPrevBtn) techPrevBtn.addEventListener('click', () => { techGoTo(techCurrent - 1); startTechAuto(); });
+  if (techNextBtn) techNextBtn.addEventListener('click', () => { techGoTo(techCurrent + 1); startTechAuto(); });
   showTechSlide(0);
   startTechAuto();
 }
@@ -440,6 +455,7 @@ const certTrack = document.querySelector('.cert-track');
 const certCards = document.querySelectorAll('.cert-card');
 const certBtns = document.querySelectorAll('.cert-btn');
 let certIndex = 0;
+let certTimer;
 
 function certStep() { return window.innerWidth <= 768 ? 1 : 3; }
 function certMax() { return Math.max(0, certCards.length - certStep()); }
@@ -448,18 +464,30 @@ function certMove() {
   const stepPx = certCards[0].offsetWidth + gap;
   certTrack.style.transform = `translateX(-${certIndex * stepPx}px)`;
 }
+function certStartAuto() {
+  clearInterval(certTimer);
+  certTimer = setInterval(() => {
+    if (certIndex < certMax()) certIndex += certStep();
+    else certIndex = 0;
+    certMove();
+  }, 3000);
+}
 certBtns.forEach((btn, i) => {
   btn.addEventListener('click', () => {
     if (i === 0) certIndex = Math.max(0, certIndex - certStep());
     else certIndex = Math.min(certMax(), certIndex + certStep());
     certMove();
+    certStartAuto();
   });
 });
 window.addEventListener('resize', () => {
   certIndex = Math.min(certIndex, certMax());
   certMove();
 });
-if (certCards.length) certMove();
+if (certCards.length) {
+  certMove();
+  certStartAuto();
+}
 
 // ===========================
 // CODING JOURNEY CONTRIBUTION GRAPH
