@@ -694,11 +694,15 @@ function lightenHex(hex, amt) {
 function applyThemeColor(hex) {
   if (!/^#[0-9a-fA-F]{3}$|^#[0-9a-fA-F]{6}$/.test(hex)) return false;
   const root = document.documentElement;
+  const body = document.body;
   const rgb = hexToRgb(hex).join(', ');
   const light = lightenHex(hex, 0.35);
   root.style.setProperty('--accent', hex);
   root.style.setProperty('--accent2', light);
   root.style.setProperty('--accent-rgb', rgb);
+  body.style.setProperty('--accent', hex);
+  body.style.setProperty('--accent2', light);
+  body.style.setProperty('--accent-rgb', rgb);
   localStorage.setItem('themeColor', hex);
   markActiveSwatch(hex);
   return true;
