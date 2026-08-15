@@ -6,6 +6,11 @@ try {
 } catch (e) {
   console.error('DNS override failed:', e.message);
 }
+try {
+  dns.setDefaultResultOrder('ipv4first');
+} catch (e) {
+  console.error('IPv4-first DNS failed:', e.message);
+}
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
