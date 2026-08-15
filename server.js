@@ -26,15 +26,22 @@ const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: Number(process.env.EMAIL_PORT) || 465,
   secure: (Number(process.env.EMAIL_PORT) || 465) === 465,
+  connectionTimeout: 15000,
+  greetingTimeout: 15000,
+  socketTimeout: 20000,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   }
 });
 
+const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
+const resendConfigured = !!RESEND_API_KEY && !RESEND_API_KEY.includes('your') && RESEND_API_KEY.length > 20;
+const resendFrom = process.env.RESEND_FROM || 'Portfolio <onboarding@resend.dev>';
+
 async function sendContactEmail(data) {
   const subject = data.subject ? `Portfolio: ${data.subject}` : 'New Portfolio Contact Message';
-  const body = [
+  const text = [
     'You received a new message from your portfolio.',
     '',
     `Name: ${data.name}`,
@@ -50,11 +57,33 @@ async function sendContactEmail(data) {
     `Sent at: ${new Date().toLocaleString()}`
   ].join('\n');
 
+  if (resendConfigured) {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + RESEND_API_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: resendFrom,
+        to: [process.env.EMAIL_TO],
+        reply_to: data.email,
+        subject,
+        text
+      })
+    });
+    if (!res.ok) {
+      const body = await res.text();
+      throw new Error('Resend error ' + res.status + ': ' + body);
+    }
+    return res.json();
+  }
+
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
     to: process.env.EMAIL_TO,
     subject,
-    text: body
+    text
   });
 }
 
