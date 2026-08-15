@@ -2440,6 +2440,43 @@ body.light .theme-toggle .icon-moon { display: none; }
 }
 
 /* ===========================
+   BACK TO BOTTOM
+=========================== */
+.back-to-bottom {
+  position: fixed;
+  bottom: 1.8rem;
+  right: 6.2rem;
+  z-index: 99;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: opacity 0.35s, transform 0.35s, visibility 0.35s, background 0.3s, color 0.3s;
+}
+.back-to-bottom.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-bottom:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+@media (max-width: 768px) {
+  .back-to-bottom { bottom: 1.2rem; right: 5.2rem; width: 44px; height: 44px; }
+}
+
+/* ===========================
    HIRE ME BUTTON
 =========================== */
 .btn-gold {

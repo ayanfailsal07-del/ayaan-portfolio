@@ -643,6 +643,19 @@ backToTop.addEventListener('click', () => {
 });
 
 // ===========================
+// BACK TO BOTTOM
+// ===========================
+const backToBottom = document.getElementById('backToBottom');
+window.addEventListener('scroll', () => {
+  const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 20;
+  if (window.scrollY > 400 && !atBottom) backToBottom.classList.add('show');
+  else backToBottom.classList.remove('show');
+});
+backToBottom.addEventListener('click', () => {
+  window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+});
+
+// ===========================
 // THEME COLOR PICKER
 // ===========================
 const THEME_PRESETS = [
