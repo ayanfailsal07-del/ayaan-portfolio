@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ayaan-portfolio-production.up.railway.app/sitemap.xml
