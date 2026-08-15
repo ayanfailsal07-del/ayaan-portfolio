@@ -21,7 +21,13 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm-8-7H1m22 0h-3M12 6V3m0 18v-3M5.6 5.6l-2.1-2.1m17 17-2.1-2.1m0-12.8 2.1-2.1M3.5 20.5l2.1-2.1"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+    </div>
   </nav>
 
   <!-- HERO SECTION -->
@@ -33,6 +39,7 @@
       <p class="hero-comment">// Welcome to my portfolio — a motivated student &amp; fresher, always learning, and ready to build something great together.</p>
       <div class="hero-btns">
         <a href="#projects" class="btn btn-brown">View My Work</a>
+        <a href="#contact" class="btn btn-gold hire-me-btn">Hire Me</a>
         <a href="#" class="btn btn-outline">Download CV</a>
       </div>
       <div class="hero-socials">
@@ -1469,6 +1476,10 @@
     </div>
     <p class="footer-copy">© 2026 All Rights Reserved</p>
   </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 20V5m0 0l-6 6m6-6l6 6"/><path d="M12 20V5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 11l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
 
   <script src="js/script.js"></script>
 </body>

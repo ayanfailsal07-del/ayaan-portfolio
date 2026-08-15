@@ -1,4 +1,4 @@
-/* ===========================
+﻿/* ===========================
    CSS VARIABLES
 =========================== */
 :root {
@@ -12,6 +12,34 @@
   --border: #2a2a2a;
   --font-display: 'Playfair Display', serif;
   --font-body: 'DM Sans', sans-serif;
+  --shadow: 0 20px 60px rgba(0,0,0,0.45);
+  --nav-bg: rgba(15,15,15,0.85);
+}
+
+body.light {
+  --bg: #f7f4ee;
+  --bg2: #efe9dd;
+  --accent: #a8842c;
+  --accent2: #8a6a20;
+  --text: #1c1a16;
+  --text-muted: #6b675f;
+  --card-bg: #ffffff;
+  --border: #e2dac8;
+  --shadow: 0 20px 60px rgba(60,50,20,0.15);
+  --nav-bg: rgba(247,244,238,0.9);
+}
+
+body.light .navbar {
+  background: var(--nav-bg);
+}
+body.light .navbar,
+body.light .footer,
+body.light .theme-toggle,
+body.light .back-to-top {
+  border-color: var(--border);
+}
+body.light .theme-toggle:hover {
+  background: rgba(168,132,44,0.12);
 }
 
 /* ===========================
@@ -41,7 +69,7 @@ img { max-width: 100%; display: block; }
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 6%;
-  background: rgba(15,15,15,0.85);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   transition: border-color 0.3s;
@@ -89,7 +117,7 @@ img { max-width: 100%; display: block; }
   cursor: pointer;
   transition: all 0.3s ease;
 }
-.btn:hover { background: var(--accent); color: #0f0f0f; }
+.btn:hover { background: var(--accent); color: var(--bg); }
 
 .hero-btns {
   display: flex;
@@ -248,7 +276,7 @@ img { max-width: 100%; display: block; }
 .btn-brown {
   background: var(--accent);
   border-color: var(--accent);
-  color: #0f0f0f;
+  color: var(--bg);
   font-weight: 500;
 }
 .btn-brown:hover {
@@ -707,7 +735,7 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #161616;
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.35);
@@ -773,7 +801,7 @@ img { max-width: 100%; display: block; }
   margin-top: 1.5rem;
 }
 .svc-box {
-  background: #161616;
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 1.8rem 1.5rem;
@@ -865,7 +893,7 @@ img { max-width: 100%; display: block; }
 }
 .proj-card {
   display: none;
-  background: #161616;
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 1.8rem;
@@ -956,7 +984,7 @@ img { max-width: 100%; display: block; }
   margin-bottom: 1.1rem;
 }
 .exp-card {
-  background: #161616;
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 1.5rem;
@@ -1028,7 +1056,7 @@ img { max-width: 100%; display: block; }
   text-align: center;
 }
 .num-card {
-  background: #161616;
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 1.8rem 1.2rem;
@@ -1082,7 +1110,7 @@ img { max-width: 100%; display: block; }
 }
 .cert-card {
   flex: 0 0 calc((100% - 2rem) / 3);
-  background: #161616;
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 1.6rem 1.2rem;
@@ -1138,7 +1166,7 @@ img { max-width: 100%; display: block; }
   height: 46px;
   border: 1.5px solid var(--border);
   border-radius: 50%;
-  background: #161616;
+  background: var(--bg2);
   color: var(--accent);
   font-size: 1.2rem;
   cursor: pointer;
@@ -1194,7 +1222,7 @@ img { max-width: 100%; display: block; }
   text-align: center;
 }
 .ach-card {
-  background: #161616;
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 1.6rem 1.2rem;
@@ -1237,7 +1265,7 @@ img { max-width: 100%; display: block; }
   text-align: left;
 }
 .cj-github-box {
-  background: #161616;
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 1.2rem;
@@ -1340,7 +1368,7 @@ img { max-width: 100%; display: block; }
   gap: 1rem;
 }
 .cj-card {
-  background: #161616;
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 1.3rem 1.2rem;
@@ -1383,7 +1411,7 @@ img { max-width: 100%; display: block; }
   text-align: center;
 }
 .tm-card {
-  background: #161616;
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 1.6rem 1.3rem;
@@ -1458,7 +1486,7 @@ img { max-width: 100%; display: block; }
   gap: 1rem;
 }
 .faq-card {
-  background: #161616;
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
@@ -1649,7 +1677,7 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   transition: background 0.2s, color 0.2s;
 }
-.slider-btn:hover { background: var(--accent); color: #0f0f0f; }
+.slider-btn:hover { background: var(--accent); color: var(--bg); }
 
 /* --- Dots --- */
 .slider-dots { display: flex; gap: 0.5rem; align-items: center; justify-content: center; }
@@ -1899,7 +1927,7 @@ img { max-width: 100%; display: block; }
   height: 64px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), #8a6a20);
-  color: #0f0f0f;
+  color: var(--bg);
   font-family: var(--font-display);
   font-weight: 900;
   font-size: 1.7rem;
@@ -1961,7 +1989,7 @@ img { max-width: 100%; display: block; }
 
 .availability-box {
   margin-top: 1.5rem;
-  background: #161616;
+  background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 1.1rem 1.2rem;
@@ -2271,4 +2299,99 @@ img { max-width: 100%; display: block; }
   .testimonials h2,
   .contact h2 { font-size: 2.2rem; }
   .testimonial-quote { font-size: 1.15rem; }
+}
+
+/* ===========================
+   NAV ACTIONS (theme toggle + menu)
+=========================== */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, transform 0.3s;
+}
+.theme-toggle:hover {
+  background: rgba(201,168,76,0.15);
+  color: var(--accent);
+  transform: rotate(20deg);
+}
+.theme-toggle .icon-sun { display: none; }
+body.light .theme-toggle .icon-sun { display: block; }
+body.light .theme-toggle .icon-moon { display: none; }
+
+/* ===========================
+   BACK TO TOP
+=========================== */
+.back-to-top {
+  position: fixed;
+  bottom: 1.8rem;
+  right: 1.8rem;
+  z-index: 99;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: opacity 0.35s, transform 0.35s, visibility 0.35s, background 0.3s, color 0.3s;
+}
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+@media (max-width: 768px) {
+  .back-to-top { bottom: 1.2rem; right: 1.2rem; width: 44px; height: 44px; }
+}
+
+/* ===========================
+   HIRE ME BUTTON
+=========================== */
+.btn-gold {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #1c1a16;
+  border: none;
+  box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+  font-weight: 700;
+  animation: hirePulse 2.4s infinite;
+}
+.btn-gold:hover {
+  background: var(--accent2);
+  color: #1c1a16;
+  transform: translateY(-3px);
+}
+@keyframes hirePulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(201,168,76,0.35); }
+  50% { box-shadow: 0 8px 32px rgba(201,168,76,0.65); }
+}
+
+/* ===========================
+   THEME TRANSITION
+=========================== */
+body, .navbar, .card, .section, section, footer, input, textarea, button, .btn {
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
 }
