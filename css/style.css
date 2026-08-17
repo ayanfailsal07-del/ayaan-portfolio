@@ -415,6 +415,8 @@ img { max-width: 100%; display: block; }
   display: flex;
   justify-content: center;
   align-self: center;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 /* --- Desk scene: person on chair + laptop on table --- */
@@ -2237,54 +2239,65 @@ img { max-width: 100%; display: block; }
 }
 
 @media (max-width: 768px) {
-  .navbar { padding: 1rem 6%; }
+  /* NAV */
+  .navbar { padding: 0.8rem 5%; }
   .nav-links {
     position: fixed;
     top: 0; right: -100%;
     height: 100vh;
     width: 70%;
-    max-width: 300px;
+    max-width: 280px;
     background: var(--bg2);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 1.8rem;
     transition: right 0.4s ease;
     border-left: 1px solid var(--border);
   }
   .nav-links.open { right: 0; }
+  .nav-links a { font-size: 0.95rem; }
   .nav-toggle { display: block; z-index: 101; }
+
+  /* HERO */
   .hero {
     min-height: auto;
     flex-direction: column-reverse;
     justify-content: center;
     text-align: center;
-    padding: 6rem 6% 2.5rem;
-    gap: 1.5rem;
+    padding: 5.5rem 5% 2rem;
+    gap: 1.2rem;
     overflow: hidden;
   }
-  .hero::before { width: 400px; right: -120px; }
-  .hero-photo, .hero-photo-inner { width: 200px; height: 200px; }
-  .hero-badges-row { gap: 0.5rem; margin-top: 0.8rem; }
-  .hero-badge { padding: 0.5rem 0.7rem; gap: 0.4rem; }
-  .badge-logo { width: 22px; height: 22px; }
-  .hero-badge strong { font-size: 0.95rem; }
-  .hero-badge span { font-size: 0.62rem; }
-  .hero-name { font-size: clamp(2rem, 8vw, 3.2rem); }
-  .hero-tagline { font-size: 1.1rem; margin-top: 0.6rem; }
-  .hero-rotating { font-size: 1.6rem; margin-top: 0.5rem; }
-  .hero-comment { margin-top: 0.6rem; }
-  .hero-btns { justify-content: center; gap: 1rem; margin-top: 1rem; }
-  .hero-btns .btn { padding: 0.75rem 1.8rem; font-size: 0.82rem; }
-  .hero-socials { justify-content: center; margin-top: 1rem; }
+  .hero::before { width: 350px; right: -100px; top: -100px; }
+  .hero-photo, .hero-photo-inner { width: 180px; height: 180px; }
+  .hero-badges-row { gap: 0.5rem; margin-top: 0.6rem; }
+  .hero-badge { padding: 0.45rem 0.65rem; gap: 0.35rem; }
+  .badge-logo { width: 20px; height: 20px; }
+  .hero-badge strong { font-size: 0.9rem; }
+  .hero-badge span { font-size: 0.58rem; }
+  .hero-name { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+  .hero-tagline { font-size: 1rem; margin-top: 0.4rem; }
+  .hero-rotating { font-size: 1.4rem; margin-top: 0.3rem; min-height: 1.8rem; }
+  .hero-comment { font-size: 0.9rem; margin-top: 0.4rem; }
+  .hero-btns { justify-content: center; gap: 0.8rem; margin-top: 0.8rem; }
+  .hero-btns .btn { padding: 0.65rem 1.5rem; font-size: 0.8rem; }
+  .hero-socials { justify-content: center; margin-top: 0.6rem; gap: 0.6rem; }
+  .social-box { width: 40px; height: 40px; }
   .hero-stats {
     grid-template-columns: repeat(2, auto);
     justify-content: center;
-    gap: 1rem 1.5rem;
-    margin-top: 1rem;
+    gap: 0.8rem 1.5rem;
+    margin-top: 0.8rem;
   }
-  .hstat-suffix { font-size: 1rem; }
-  .stats-strip { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; padding: 2.5rem 5%; }
+  .hero-stats .stat-num { font-size: 1.2rem; }
+  .hstat-suffix { font-size: 0.9rem; }
+
+  /* STATS STRIP */
+  .stats-strip { padding: 2rem 5%; gap: 1rem; }
+  .stats-strip { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+
+  /* ALL SECTIONS */
   section,
   .about,
   .skills,
@@ -2292,99 +2305,159 @@ img { max-width: 100%; display: block; }
   .services,
   .projects,
   .testimonials,
-  .contact { padding: 5rem 5%; }
+  .contact { padding: 4rem 5%; }
+
+  /* SECTION HEADINGS */
   .education h2,
   .services h2,
   .projects h2,
   .testimonials h2,
   .contact h2,
-  .skills h2 { font-size: 2.2rem; margin-bottom: 2rem; }
-  .about-grid { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
-  .about-grid > div { margin-top: 0; }
+  .skills h2 { font-size: 1.9rem; margin-bottom: 1.5rem; }
+
+  /* ABOUT */
+  .about-grid { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
   .about-info { grid-template-columns: 1fr; text-align: center; }
   .about-comment { text-align: left; }
-  .about-h2 { font-size: 2.3rem; }
-  .about-label { font-size: 1.1rem; }
-  .about-badges { margin-top: 1rem; }
-  .about-btns { justify-content: center; margin-top: 1rem; }
-  .about-dash-2 { margin-top: 1rem; }
-  .about-desc { margin-bottom: 0.8rem; }
-  .oval-btn { font-size: 0.82rem; padding: 0.45rem 0.4rem; }
-  .tech-big-card { min-height: 180px; }
-  .tech-logo { width: 105px; height: 105px; font-size: 1.8rem; }
-  .tech-name { font-size: 1.4rem; }
+  .about-h2 { font-size: 2rem; }
+  .about-label { font-size: 1rem; }
+  .about-badges { margin-top: 0.8rem; }
+  .about-btns { justify-content: center; margin-top: 0.8rem; }
+  .about-dash-2 { margin-top: 0.8rem; }
+  .about-desc { margin-bottom: 0.5rem; }
+  .about-comment { font-size: 0.9rem; padding: 0.6rem 0.8rem; margin-bottom: 0.6rem; }
+  .about-comment-2 { margin-bottom: 0.8rem; }
+  .about-text h2 { font-size: 1.8rem; }
+  .about-text p { font-size: 0.95rem; }
+  .about-center .skills-oval { max-width: 100%; }
+  .about-center .skill-lists { max-width: 100%; }
+  .about-center .tech-slider { max-width: 100%; }
+  .oval-btn { font-size: 0.78rem; padding: 0.4rem 0.35rem; }
+
+  /* DESK SCENE */
+  .desk-scene { width: 300px; height: 340px; }
+  .scene-table { top: 220px; }
+  .table-top { height: 65px; }
+  .table-front { top: 65px; bottom: 30px; }
+  .table-leg { height: 30px; width: 18px; }
+  .leg-left { left: 20px; }
+  .leg-right { right: 20px; }
+  .laptop-mockup { transform: translateX(-50%) scale(0.55); bottom: 50px; }
+
+  /* TECH SLIDER */
+  .tech-big-card { min-height: 170px; }
+  .tech-logo { width: 90px; height: 90px; font-size: 1.6rem; }
+  .tech-name { font-size: 1.3rem; }
+
+  /* SKILLS */
+  .skill-card { max-width: 100%; padding: 3rem 2rem; }
+  .skill-card h3 { font-size: 1.8rem; margin-bottom: 1.2rem; }
+  .skill-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+  .skill-bar { margin-bottom: 1rem; }
+  .skills-slider-wrap { min-height: 280px; }
+  .slider-btns { margin-bottom: 0.6rem; }
+
+  /* SERVICES */
   .svc-grid { grid-template-columns: 1fr; }
-  .service-card { padding: 3rem 2rem; }
-  .services-slider-wrap { min-height: 350px; }
-  .proj-card { padding: 1.4rem; }
-  .proj-filter { font-size: 0.78rem; padding: 0.4rem 1rem; }
-  .project-thumb { height: 180px; }
-  .project-body { padding: 1.5rem; }
-  .projects-slider-wrap { min-height: 380px; }
+  .service-card { padding: 2.5rem 1.8rem; }
+  .service-icon { margin-bottom: 1rem; }
+  .services-slider-wrap { min-height: 320px; }
+  .svc-box { padding: 1.5rem 1.2rem; }
+  .svc-title { font-size: 1.1rem; }
+  .svc-desc { font-size: 0.9rem; }
+
+  /* PROJECTS */
+  .proj-card { padding: 1.2rem; }
+  .proj-filter { font-size: 0.75rem; padding: 0.35rem 0.9rem; }
+  .project-thumb { height: 160px; }
+  .project-body { padding: 1.4rem; gap: 0.5rem; }
+  .projects-slider-wrap { min-height: 360px; }
+
+  /* EDUCATION */
+  .journey-slide { padding: 1.8rem 1.3rem; }
+  .journey-slider-wrap { min-height: 260px; }
+
+  /* EXPERIENCE */
   .exp-columns { grid-template-columns: 1fr; }
+  .exp-card { padding: 1.2rem; }
+
+  /* CERTIFICATES */
   .cert-card { flex: 0 0 100%; }
+  .cert-card { padding: 1rem; }
+
+  /* ACHIEVEMENTS */
   .ach-grid { grid-template-columns: 1fr 1fr; }
+
+  /* CODING JOURNEY */
   .cj-grid { grid-template-columns: 1fr; }
+
+  /* TESTIMONIALS */
   .tm-grid { grid-template-columns: 1fr; }
-  .num-big .num-value { font-size: 2.6rem; }
-  .num-value { font-size: 2rem; }
+  .testimonial-slide { padding: 2.5rem 1.8rem; }
+  .testimonial-slider { min-height: 280px; }
+  .testimonial-quote { font-size: 1.05rem; margin-bottom: 1.2rem; }
+  .testimonial-dots { margin-top: 1rem; }
+  .tm-card { padding: 1.3rem 1rem; }
+
+  /* NUMBERS */
   .nums-grid { grid-template-columns: 1fr 1fr; }
-  .desk-scene { width: 340px; height: 390px; }
-  .scene-table { top: 260px; }
-  .table-top { height: 75px; }
-  .table-front { top: 75px; bottom: 34px; }
-  .table-leg { height: 34px; width: 20px; }
-  .leg-left { left: 22px; }
-  .leg-right { right: 22px; }
-  .laptop-mockup { transform: translateX(-50%) scale(0.62); bottom: 55px; }
-  .about-badges { justify-content: center; }
-  .about-btns { justify-content: center; }
-  .nav-links { gap: 1.2rem; }
-  .skill-card { max-width: 100%; padding: 4rem 3rem; }
-  .skills-slider-wrap { min-height: 300px; }
-  .skills h2 { margin-bottom: 2rem; }
-  .slider-btns { margin-bottom: 0.8rem; }
-  .journey-slide { padding: 2rem 1.5rem; }
-  .journey-slider-wrap { min-height: 280px; }
-  .testimonial-slide { padding: 3rem 2rem; }
-  .testimonial-slider { min-height: 300px; }
-  .testimonial-quote { font-size: 1.15rem; margin-bottom: 1.5rem; }
-  .testimonial-dots { margin-top: 1.2rem; }
-  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .contact-info > p { margin-bottom: 1rem; }
+  .num-big .num-value { font-size: 2.2rem; }
+  .num-value { font-size: 1.7rem; }
+  .num-card { padding: 1.2rem 0.8rem; }
+
+  /* CONTACT */
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .contact-info > p { margin-bottom: 0.8rem; }
   .form-row { grid-template-columns: 1fr; }
-  .steps-section { margin-top: 2.5rem; }
-  .footer { padding: 2.5rem 5%; }
+  .steps-section { margin-top: 2rem; }
+  .contact-info .whatsapp-btn { width: 100%; text-align: center; }
+  .form-btn { width: 100%; }
+
+  /* FAQ */
+  .faq-card { padding: 1rem; }
+  .faq-a { font-size: 0.88rem; }
+  .load-btn { padding: 0.4rem 1rem; font-size: 0.78rem; }
+
+  /* FOOTER */
+  .footer { padding: 2rem 5%; }
+  .footer-social a { width: 36px; height: 36px; }
 }
 
 /* --- Small phones (< 480px) --- */
 @media (max-width: 480px) {
-  .navbar { padding: 0.9rem 5%; }
+  .navbar { padding: 0.7rem 4%; }
   .nav-links { width: 82%; max-width: none; }
-  .nav-logo { font-size: 1.3rem; }
-  .hero { padding: 5.5rem 5% 2rem; gap: 1.2rem; }
-  .hero::before { width: 300px; right: -100px; top: -80px; }
-  .hero-photo, .hero-photo-inner { width: 160px; height: 160px; }
-  .hero-badges-row { gap: 0.4rem; margin-top: 0.6rem; }
-  .hero-badge { padding: 0.4rem 0.55rem; gap: 0.3rem; }
-  .badge-logo { width: 18px; height: 18px; }
-  .hero-badge strong { font-size: 0.82rem; }
-  .hero-badge span { font-size: 0.52rem; }
-  .hero-name { font-size: clamp(1.6rem, 7vw, 2.4rem); }
-  .hero-tagline { font-size: 0.95rem; margin-top: 0.4rem; }
-  .hero-rotating { font-size: 1.25rem; margin-top: 0.4rem; }
-  .hero-comment { font-size: 0.9rem; margin-top: 0.4rem; }
-  .hero-btns { gap: 0.6rem; margin-top: 0.6rem; }
-  .hero-btns .btn { padding: 0.6rem 1.2rem; font-size: 0.78rem; width: 100%; text-align: center; }
-  .hero-socials { gap: 0.6rem; margin-top: 0.6rem; }
-  .social-box { width: 40px; height: 40px; }
-  .hero-stats { gap: 0.8rem 1.2rem; margin-top: 0.8rem; }
-  .hero-stats .stat-num { font-size: 1.3rem; }
-  .hstat-suffix { font-size: 0.9rem; }
-  .stats-strip { padding: 2rem 5%; gap: 1rem; }
-  .stat-num { font-size: 1.8rem; }
-  .stat-suffix { font-size: 1.2rem; }
-  .nums-grid { grid-template-columns: 1fr; }
+  .nav-logo { font-size: 1.2rem; }
+  .nav-links a { font-size: 0.85rem; }
+
+  /* HERO */
+  .hero { padding: 5rem 4% 1.5rem; gap: 1rem; }
+  .hero::before { width: 250px; right: -80px; top: -60px; }
+  .hero-photo, .hero-photo-inner { width: 140px; height: 140px; }
+  .hero-badges-row { gap: 0.35rem; margin-top: 0.4rem; flex-wrap: wrap; justify-content: center; }
+  .hero-badge { padding: 0.35rem 0.5rem; gap: 0.25rem; border-radius: 8px; }
+  .badge-logo { width: 16px; height: 16px; }
+  .hero-badge strong { font-size: 0.78rem; }
+  .hero-badge span { font-size: 0.48rem; }
+  .hero-name { font-size: clamp(1.5rem, 6.5vw, 2.2rem); }
+  .hero-tagline { font-size: 0.88rem; margin-top: 0.3rem; }
+  .hero-rotating { font-size: 1.15rem; margin-top: 0.2rem; min-height: 1.5rem; }
+  .hero-comment { font-size: 0.82rem; margin-top: 0.3rem; }
+  .hero-btns { gap: 0.5rem; margin-top: 0.5rem; }
+  .hero-btns .btn { padding: 0.55rem 1.1rem; font-size: 0.75rem; width: 100%; text-align: center; }
+  .hero-socials { gap: 0.5rem; margin-top: 0.5rem; }
+  .social-box { width: 36px; height: 36px; }
+  .hero-stats { gap: 0.6rem 1rem; margin-top: 0.6rem; }
+  .hero-stats .stat-num { font-size: 1.1rem; }
+  .hstat-suffix { font-size: 0.82rem; }
+  .hstat-label { font-size: 0.65rem; }
+
+  /* STATS */
+  .stats-strip { padding: 1.5rem 4%; gap: 0.8rem; }
+  .stat-num { font-size: 1.6rem; }
+  .stat-suffix { font-size: 1.1rem; }
+
+  /* ALL SECTIONS */
   section,
   .about,
   .skills,
@@ -2392,85 +2465,120 @@ img { max-width: 100%; display: block; }
   .services,
   .projects,
   .testimonials,
-  .contact { padding: 3.5rem 5%; }
-  .section-label { letter-spacing: 2px; font-size: 0.7rem; }
+  .contact { padding: 3rem 4%; }
+
+  /* HEADINGS */
+  .section-label { letter-spacing: 2px; font-size: 0.65rem; }
   .education h2,
   .services h2,
   .projects h2,
   .testimonials h2,
   .contact h2,
-  .skills h2 { font-size: 1.7rem; margin-bottom: 1.5rem; }
-  .about-h2 { font-size: 1.7rem; }
-  .about-desc { font-size: 0.95rem; margin-bottom: 0.6rem; }
-  .about-text h2 { font-size: 1.7rem; }
-  .about-comment { font-size: 0.85rem; padding: 0.7rem 0.9rem; margin-bottom: 0.8rem; }
-  .about-comment-2 { margin-bottom: 1rem; }
-  .about-info { gap: 0.7rem; }
-  .about-badges { margin-top: 0.8rem; }
-  .about-btns { margin-top: 0.8rem; }
-  .about-dash-2 { margin-top: 0.8rem; }
-  .oval-btn { font-size: 0.72rem; padding: 0.35rem 0.3rem; white-space: normal; }
-  .desk-scene { width: 260px; height: 300px; }
-  .scene-table { top: 195px; }
-  .table-top { height: 58px; }
-  .table-front { top: 58px; bottom: 26px; }
-  .table-leg { height: 26px; width: 15px; }
-  .leg-left { left: 16px; }
-  .leg-right { right: 16px; }
-  .laptop-mockup { transform: translateX(-50%) scale(0.45); bottom: 40px; }
-  .skill-card { padding: 2.5rem 1.4rem; }
-  .skill-card h3 { font-size: 1.6rem; margin-bottom: 1.2rem; }
-  .skill-icon { font-size: 3.5rem; margin-bottom: 1.2rem; }
-  .skill-bar { margin-bottom: 1rem; }
-  .skills-slider-wrap { min-height: 260px; }
-  .slider-btns { margin-bottom: 0.6rem; }
-  .journey-slide { padding: 1.5rem 1rem; }
-  .journey-slider-wrap { min-height: 240px; }
-  .service-card { padding: 2rem 1.2rem; }
-  .service-icon { margin-bottom: 1rem; }
-  .services-slider-wrap { min-height: 300px; }
-  .testimonial-slide { padding: 2rem 1.2rem; }
-  .testimonial-slider { min-height: 260px; }
-  .testimonial-quote { font-size: 0.95rem; margin-bottom: 1rem; }
-  .testimonial-dots { margin-top: 1rem; }
-  .testimonial-avatar { width: 52px; height: 52px; }
-  .project-thumb { height: 140px; }
-  .project-body { padding: 1.2rem; }
-  .projects-slider-wrap { min-height: 320px; }
-  .contact-info > p { margin-bottom: 0.8rem; }
-  .steps-section { margin-top: 2rem; }
-  .steps-track { grid-template-columns: 1fr; gap: 1.5rem; }
-  .steps-line { display: none; }
-  .contact-grid { gap: 1.5rem; }
-  .form-btn { width: 100%; }
-  .footer { padding: 2rem 5%; }
-  .footer-social a { width: 36px; height: 36px; }
-  .footer-social { gap: 0.8rem; margin: 0.8rem 0; }
-  .about-command { font-size: 0.8rem; padding: 0.5rem 0.7rem; overflow-x: auto; }
-  .about-command .cmd-line { white-space: nowrap; }
-  .tech-big-card { min-height: 160px; }
-  .tech-logo { width: 80px; height: 80px; font-size: 1.3rem; }
-  .tech-name { font-size: 1.2rem; }
-  .svc-box { padding: 1.2rem 1rem; }
-  .svc-title { font-size: 0.95rem; }
+  .skills h2 { font-size: 1.5rem; margin-bottom: 1.2rem; }
+  .about-h2 { font-size: 1.5rem; }
+  .about-desc { font-size: 0.88rem; margin-bottom: 0.3rem; }
+  .about-text h2 { font-size: 1.5rem; }
+  .about-text p { font-size: 0.88rem; }
+
+  /* ABOUT */
+  .about-comment { font-size: 0.82rem; padding: 0.5rem 0.7rem; margin-bottom: 0.4rem; }
+  .about-comment-2 { margin-bottom: 0.5rem; }
+  .about-info { gap: 0.5rem; }
+  .about-badges { margin-top: 0.5rem; }
+  .about-btns { margin-top: 0.5rem; }
+  .about-dash-2 { margin-top: 0.6rem; }
+  .about-label { font-size: 0.9rem; }
+  .about-btns .btn { padding: 0.5rem 1rem; font-size: 0.72rem; }
+  .oval-btn { font-size: 0.68rem; padding: 0.3rem 0.25rem; white-space: normal; }
+  .skills-oval { gap: 0.2rem; padding: 0.2rem; }
+
+  /* DESK */
+  .desk-scene { width: 240px; height: 270px; }
+  .scene-table { top: 175px; }
+  .table-top { height: 52px; }
+  .table-front { top: 52px; bottom: 24px; }
+  .table-leg { height: 24px; width: 14px; }
+  .leg-left { left: 14px; }
+  .leg-right { right: 14px; }
+  .laptop-mockup { transform: translateX(-50%) scale(0.42); bottom: 36px; }
+
+  /* TECH */
+  .tech-big-card { min-height: 140px; }
+  .tech-logo { width: 70px; height: 70px; font-size: 1.2rem; }
+  .tech-name { font-size: 1.1rem; }
+
+  /* SKILLS */
+  .skill-card { padding: 2rem 1.2rem; }
+  .skill-card h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+  .skill-icon { font-size: 3rem; margin-bottom: 0.8rem; }
+  .skill-bar { margin-bottom: 0.8rem; }
+  .skills-slider-wrap { min-height: 240px; }
+  .slider-btns { margin-bottom: 0.4rem; }
+
+  /* SERVICES */
+  .service-card { padding: 1.8rem 1.2rem; }
+  .service-icon { margin-bottom: 0.8rem; }
+  .services-slider-wrap { min-height: 280px; }
+  .svc-box { padding: 1rem 0.8rem; }
+  .svc-title { font-size: 0.92rem; }
   .svc-desc { font-size: 0.82rem; }
-  .proj-card { padding: 1rem; }
-  .proj-filters { gap: 0.4rem; }
-  .proj-filter { font-size: 0.72rem; padding: 0.35rem 0.8rem; }
-  .exp-card { padding: 1rem; }
-  .num-card { padding: 1.2rem 0.8rem; }
-  .num-value { font-size: 1.6rem; }
-  .num-big .num-value { font-size: 2rem; }
-  .cert-card { padding: 1rem; }
-  .about-btns { flex-direction: column; align-items: center; }
-  .about-btns .btn { width: 100%; text-align: center; }
-  .about-badges { gap: 0.4rem; }
-  .badge-pill { font-size: 0.7rem; padding: 0.35rem 0.6rem; }
-  .tm-card { padding: 1.2rem; }
-  .faq-card { padding: 1rem; }
-  .faq-a { font-size: 0.82rem; }
-  .load-btn { padding: 0.4rem 1rem; font-size: 0.78rem; }
+
+  /* PROJECTS */
+  .proj-card { padding: 0.9rem; }
+  .proj-filters { gap: 0.3rem; }
+  .proj-filter { font-size: 0.68rem; padding: 0.3rem 0.7rem; }
+  .project-thumb { height: 120px; }
+  .project-body { padding: 1rem; gap: 0.4rem; }
+  .projects-slider-wrap { min-height: 300px; }
+
+  /* EDUCATION */
+  .journey-slide { padding: 1.3rem 0.9rem; }
+  .journey-slider-wrap { min-height: 220px; }
+
+  /* EXPERIENCE */
+  .exp-card { padding: 0.9rem; }
+
+  /* CERTIFICATES */
+  .cert-card { padding: 0.8rem; }
+
+  /* ACHIEVEMENTS */
   .ach-grid { grid-template-columns: 1fr; }
+
+  /* TESTIMONIALS */
+  .testimonial-slide { padding: 1.8rem 1rem; }
+  .testimonial-slider { min-height: 230px; }
+  .testimonial-quote { font-size: 0.9rem; margin-bottom: 0.8rem; }
+  .testimonial-avatar { width: 44px; height: 44px; }
+  .testimonial-dots { margin-top: 0.8rem; }
+  .tm-card { padding: 1rem 0.8rem; }
+
+  /* NUMBERS */
+  .nums-grid { grid-template-columns: 1fr; }
+  .num-card { padding: 1rem 0.7rem; }
+  .num-value { font-size: 1.4rem; }
+  .num-big .num-value { font-size: 1.7rem; }
+
+  /* CONTACT */
+  .contact-grid { gap: 1.2rem; }
+  .contact-info > p { margin-bottom: 0.5rem; }
+  .steps-section { margin-top: 1.5rem; }
+  .steps-track { gap: 1.2rem; }
+  .form-row { gap: 0.6rem; }
+  .contact-form { gap: 0.7rem; }
+
+  /* ABOUT CMD */
+  .about-command { font-size: 0.75rem; padding: 0.45rem 0.6rem; overflow-x: auto; }
+  .about-command .cmd-line { white-space: nowrap; }
+
+  /* FAQ */
+  .faq-card { padding: 0.8rem; }
+  .faq-a { font-size: 0.82rem; }
+  .load-btn { padding: 0.35rem 0.8rem; font-size: 0.72rem; }
+
+  /* FOOTER */
+  .footer { padding: 1.5rem 4%; }
+  .footer-social a { width: 32px; height: 32px; }
+  .footer-social { gap: 0.6rem; margin: 0.6rem 0; }
 }
 
 /* ===========================
