@@ -575,44 +575,25 @@ if (stepsSection && stepsLineFill && stepEls.length) {
 }
 
 // ===========================
-// CONTACT FORM (stores message via backend -> MongoDB)
+// CONTACT FORM (Netlify Forms)
 // ===========================
-const CONTACT_API_URL = '/api/contact';
-
 function handleContact(event) {
   event.preventDefault();
   const form = event.target;
-  const name = form.name.value.trim();
-  const email = form.email.value.trim();
-  const subject = form.subject.value.trim();
-  const message = form.message.value.trim();
-  const project = (form.project.value || '').trim();
-  const budget = (form.budget.value || '').trim();
-  const timeline = (form.timeline.value || '').trim();
-
   const btn = form.querySelector('.form-btn');
   const originalText = btn.textContent;
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
-  fetch(CONTACT_API_URL, {
+  const formData = new FormData(form);
+
+  fetch('/', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name,
-      email,
-      subject,
-      message,
-      projectType: project,
-      budget,
-      timeline
-    })
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(formData).toString()
   })
   .then(res => {
     if (!res.ok) throw new Error('Request failed');
-    return res.json();
-  })
-  .then(() => {
     btn.textContent = 'Message Sent!';
     form.reset();
     setTimeout(() => {
