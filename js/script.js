@@ -14,15 +14,26 @@ window.addEventListener('scroll', () => {
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.querySelectorAll('.nav-links a');
 const linksList = document.getElementById('navLinks');
+const navOverlay = document.getElementById('navOverlay');
+
+function closeNav() {
+  linksList.classList.remove('open');
+  if (navOverlay) navOverlay.classList.remove('show');
+}
 
 if (navToggle) {
   navToggle.addEventListener('click', () => {
-    linksList.classList.toggle('open');
+    const isOpen = linksList.classList.toggle('open');
+    if (navOverlay) navOverlay.classList.toggle('show', isOpen);
   });
 }
 
+if (navOverlay) {
+  navOverlay.addEventListener('click', closeNav);
+}
+
 navLinks.forEach(l => {
-  l.addEventListener('click', () => linksList.classList.remove('open'));
+  l.addEventListener('click', closeNav);
 });
 
 // ===========================
