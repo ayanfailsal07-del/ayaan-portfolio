@@ -2244,12 +2244,11 @@ img { max-width: 100%; display: block; }
   /* UNIVERSAL MOBILE FIX */
   * { word-break: break-word; overflow-wrap: break-word; }
   html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
-  section, .about, .skills, .education, .services, .projects, .testimonials, .contact, .faq { overflow-x: hidden; max-width: 100%; }
   .about-img-wrap { max-width: 100%; overflow: hidden; }
-  .desk-scene { max-width: 300px; margin: 0 auto; overflow: hidden; }
+  .desk-scene { max-width: 300px; margin: 0 auto; }
   .hero-photo-wrap { max-width: 100%; }
   .hero { overflow: hidden; }
-  .about-center { max-width: 100%; overflow: hidden; }
+  .about-center { max-width: 100%; }
 
   /* NAV */
   .navbar { padding: 0.8rem 5%; }
@@ -2499,8 +2498,8 @@ img { max-width: 100%; display: block; }
   .services,
   .projects,
   .testimonials,
-  .contact { padding: 3rem 4%; max-width: 100%; overflow-x: hidden; }
-  .about-center { max-width: 100%; overflow: hidden; }
+  .contact { padding: 3rem 4%; max-width: 100%; }
+  .about-center { max-width: 100%; }
 
   /* HEADINGS */
   .section-label { letter-spacing: 2px; font-size: 0.65rem; }
@@ -3063,7 +3062,7 @@ body, .navbar, .card, .section, section, footer, input, textarea, button, .btn {
   /* SECTIONS */
   section, .about, .skills, .education, .services, .projects, .testimonials, .contact {
     padding: 2.5rem 3%;
-    overflow-x: hidden;
+    max-width: 100%;
   }
 
   /* HEADINGS */
@@ -3248,4 +3247,95 @@ body, .navbar, .card, .section, section, footer, input, textarea, button, .btn {
   /* LITHUB BOX FIX */
   .proj-links { flex-direction: column; gap: 0.3rem; }
   .proj-links .btn { width: 100%; text-align: center; }
+}
+
+/* ===========================
+   FINAL MOBILE OVERRIDE (Nuclear Fix)
+   Ensures nothing is clipped or hidden
+=========================== */
+@media (max-width: 768px) {
+  html { overflow-x: hidden; }
+  body { overflow-x: hidden; width: 100%; }
+  section { width: 100%; max-width: 100vw; overflow: visible; }
+  .about { overflow: visible; width: 100%; max-width: 100vw; }
+  .about-grid { width: 100%; max-width: 100%; overflow: visible; }
+  .about-text { width: 100%; max-width: 100%; overflow: visible; }
+  .about-center { width: 100%; max-width: 100%; overflow: visible; }
+  .about-img-wrap { width: 100%; max-width: 100%; }
+  .desk-scene { width: 280px; max-width: 90vw; height: auto; aspect-ratio: 460/500; }
+  .hero-photo-wrap { max-width: 180px; }
+  .hero-photo, .hero-photo-inner { width: 160px; height: 160px; }
+  .hero { overflow: visible; }
+  .hero::before { display: none; }
+  .skill-card { width: 100%; max-width: 100%; }
+  .tech-big-card { width: 100%; max-width: 100%; }
+  .svc-grid { width: 100%; max-width: 100%; }
+  .svc-box { width: 100%; max-width: 100%; }
+  .proj-list { width: 100%; max-width: 100%; }
+  .proj-card { width: 100%; max-width: 100%; }
+  .cert-slider { width: 100%; max-width: 100%; overflow: visible; }
+  .cert-track { overflow: visible; flex-wrap: wrap; justify-content: center; }
+  .cert-card { flex: 0 0 100%; max-width: 100%; }
+  .exp-columns { width: 100%; max-width: 100%; }
+  .exp-card { width: 100%; max-width: 100%; }
+  .nums-grid { width: 100%; max-width: 100%; }
+  .num-card { width: 100%; max-width: 100%; }
+  .ach-grid { width: 100%; max-width: 100%; }
+  .ach-card { width: 100%; max-width: 100%; }
+  .cj-grid { width: 100%; max-width: 100%; }
+  .tm-grid { width: 100%; max-width: 100%; }
+  .tm-card { width: 100%; max-width: 100%; }
+  .faq-list { width: 100%; max-width: 100%; }
+  .faq-card { width: 100%; max-width: 100%; }
+  .contact-grid { width: 100%; max-width: 100%; }
+  .contact-form { width: 100%; max-width: 100%; }
+  .steps-track { width: 100%; max-width: 100%; }
+  .footer { width: 100%; max-width: 100%; }
+  .testimonial-slider { width: 100%; max-width: 100%; }
+  .testimonial-slide { width: 100%; max-width: 100%; }
+  .skills-slider-wrap { width: 100%; max-width: 100%; }
+  .services-slider-wrap { width: 100%; max-width: 100%; }
+  .projects-slider-wrap { width: 100%; max-width: 100%; }
+  .journey-slider-wrap { width: 100%; max-width: 100%; }
+  .load-more { width: 100%; }
+  .load-btn { width: auto; }
+  .proj-filters { width: 100%; overflow-x: auto; flex-wrap: nowrap; }
+  .about-badges { flex-wrap: wrap; justify-content: center; }
+  .about-btns { flex-wrap: wrap; justify-content: center; }
+  .hero-btns { flex-wrap: wrap; justify-content: center; }
+  .hero-socials { flex-wrap: wrap; justify-content: center; }
+  .hero-stats { flex-wrap: wrap; justify-content: center; }
+  .slider-btns { flex-wrap: wrap; justify-content: center; }
+  .proj-links { flex-wrap: wrap; justify-content: center; }
+  .exp-tags { flex-wrap: wrap; }
+  .svc-tags { flex-wrap: wrap; }
+  .proj-tags { flex-wrap: wrap; }
+  .skills-oval { flex-wrap: nowrap; overflow-x: auto; }
+  .about-command { overflow-x: auto; max-width: 100%; }
+  .tech-dots { flex-wrap: wrap; justify-content: center; }
+  .cert-controls { flex-wrap: wrap; justify-content: center; }
+  .hero-comment { max-width: 100%; }
+  .hero-tagline { max-width: 100%; }
+  .hero-name { max-width: 100%; word-break: break-word; }
+  h1, h2, h3, h4, h5, h6 { max-width: 100%; overflow-wrap: break-word; }
+  p { max-width: 100%; overflow-wrap: break-word; }
+  img { max-width: 100%; height: auto; }
+  svg { max-width: 100%; }
+  .stats-strip { width: 100%; max-width: 100%; }
+  .stat-item { min-width: 0; }
+}
+
+@media (max-width: 480px) {
+  .hero::before { display: none; }
+  .desk-scene { width: 200px; max-width: 80vw; height: auto; aspect-ratio: 460/500; }
+  .hero-photo, .hero-photo-inner { width: 120px; height: 120px; }
+  .hero-photo-wrap { max-width: 150px; }
+  .hero-btns { flex-direction: column; }
+  .hero-btns .btn { width: 100%; }
+}
+
+@media (max-width: 360px) {
+  .hero-photo, .hero-photo-inner { width: 100px; height: 100px; }
+  .hero-photo-wrap { max-width: 120px; }
+  .desk-scene { width: 160px; max-width: 70vw; }
 }
