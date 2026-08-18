@@ -575,7 +575,7 @@ if (stepsSection && stepsLineFill && stepEls.length) {
 }
 
 // ===========================
-// CONTACT FORM (Netlify Forms)
+// CONTACT FORM (Netlify Forms + fallback)
 // ===========================
 function handleContact(event) {
   event.preventDefault();
@@ -586,28 +586,62 @@ function handleContact(event) {
   btn.disabled = true;
 
   const formData = new FormData(form);
+  const body = new URLSearchParams(formData).toString();
 
   fetch('/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams(formData).toString()
+    body: body
   })
-  .then(res => {
-    if (!res.ok) throw new Error('Request failed');
-    btn.textContent = 'Message Sent!';
-    form.reset();
-    setTimeout(() => {
-      btn.textContent = originalText;
+  .then(function(res) {
+    if (res.ok) {
+      showFormSuccess(form, btn, originalText);
+    } else {
+      throw new Error('Server error ' + res.status);
+    }
+  })
+  .catch(function() {
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        subject: form.subject.value.trim(),
+        message: form.message.value.trim(),
+        projectType: (form.project.value || '').trim(),
+        budget: (form.budget.value || '').trim(),
+        timeline: (form.timeline.value || '').trim()
+      })
+    })
+    .then(function(res) {
+      if (res.ok) {
+        showFormSuccess(form, btn, originalText);
+      } else {
+        throw new Error('Fallback failed');
+      }
+    })
+    .catch(function() {
+      btn.textContent = 'Failed - Try Again';
       btn.disabled = false;
-    }, 2500);
-  })
-  .catch(() => {
-    btn.textContent = 'Failed - Try Again';
-    btn.disabled = false;
-    setTimeout(() => { btn.textContent = originalText; }, 2500);
+      setTimeout(function() { btn.textContent = originalText; }, 2500);
+    });
   });
 
   return false;
+}
+
+function showFormSuccess(form, btn, originalText) {
+  btn.textContent = 'Message Sent!';
+  btn.style.background = '#22c55e';
+  btn.style.color = '#fff';
+  form.reset();
+  setTimeout(function() {
+    btn.textContent = originalText;
+    btn.style.background = '';
+    btn.style.color = '';
+    btn.disabled = false;
+  }, 3000);
 }
 
 // ===========================
