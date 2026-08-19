@@ -1,37 +1,29 @@
+const nodemailer = require('nodemailer');
+
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ success: false, error: 'Method not allowed' })
-    };
+    return { statusCode: 405, body: JSON.stringify({ success: false, error: 'Method not allowed' }) };
   }
 
   try {
-    const data = JSON.parse(event.body);
-    const { name, email, subject, message, projectType, budget, timeline } = data;
+    const { name, email, subject, message, projectType, budget, timeline } = JSON.parse(event.body);
 
     if (!name || !email || !message) {
-      return {
-        statusCode: 400,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ success: false, error: 'Name, email and message are required' })
-      };
+      return { statusCode: 400, body: JSON.stringify({ success: false, error: 'Name, email and message are required' }) };
     }
 
-    const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    const EMAIL_TO = process.env.EMAIL_TO || 'gt.ayaan@gmail.com';
+    const transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+      port: Number(process.env.EMAIL_PORT) || 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
 
-    if (!RESEND_API_KEY) {
-      return {
-        statusCode: 500,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ success: false, error: 'Email service not configured' })
-      };
-    }
-
-    const emailSubject = subject ? `Portfolio: ${subject}` : 'New Portfolio Contact Message';
-    const emailText = [
+    const mailSubject = subject ? `Portfolio: ${subject}` : 'New Portfolio Contact Message';
+    const mailText = [
       'New message from your portfolio website',
       '',
       `Name: ${name}`,
@@ -47,34 +39,16 @@ exports.handler = async (event) => {
       `Sent at: ${new Date().toLocaleString()}`
     ].join('\n');
 
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        from: 'Portfolio Contact <onboarding@resend.dev>',
-        to: [EMAIL_TO],
-        reply_to: email,
-        subject: emailSubject,
-        text: emailText
-      })
+    await transporter.sendMail({
+      from: process.env.EMAIL_FROM || `Portfolio <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_TO || process.env.EMAIL_USER,
+      replyTo: email,
+      subject: mailSubject,
+      text: mailText
     });
-
-    if (!res.ok) {
-      const errBody = await res.text();
-      console.error('Resend error:', res.status, errBody);
-      return {
-        statusCode: 502,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ success: false, error: 'Email sending failed' })
-      };
-    }
 
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ success: true, message: 'Message sent successfully' })
     };
 
@@ -82,8 +56,7 @@ exports.handler = async (event) => {
     console.error('Contact function error:', err);
     return {
       statusCode: 500,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ success: false, error: 'Server error' })
+      body: JSON.stringify({ success: false, error: 'Failed to send email' })
     };
   }
 };

@@ -1460,19 +1460,15 @@
         </a>
       </div>
 
-      <form class="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="contact" />
-        <p style="display:none">
-          <label>Don't fill this out: <input name="bot-field" /></label>
-        </p>
+      <form class="contact-form" id="contactForm" onsubmit="return handleContact(event)">
         <div class="form-row">
           <input type="text" name="name" placeholder="Your Name" required />
           <input type="email" name="email" placeholder="Your Email" required />
         </div>
-        <input type="text" name="topic" placeholder="Subject" />
+        <input type="text" name="subject" placeholder="Subject" />
         <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
         <div class="form-row">
-          <input type="text" name="project_type" placeholder="Project Type (e.g. Website, App)" />
+          <input type="text" name="projectType" placeholder="Project Type (e.g. Website, App)" />
           <input type="text" name="budget" placeholder="Budget Range" />
         </div>
         <input type="text" name="timeline" placeholder="Timeline (e.g. 2 weeks, flexible)" />

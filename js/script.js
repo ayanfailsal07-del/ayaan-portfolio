@@ -573,6 +573,73 @@ if (stepsSection && stepsLineFill && stepEls.length) {
   }, { threshold: 0.3 });
   stepObserver.observe(stepsSection);
 }
+
+// ===========================
+// CONTACT FORM (Netlify Function - Gmail SMTP)
+// ===========================
+function handleContact(event) {
+  event.preventDefault();
+  var form = event.target;
+  var btn = form.querySelector('.form-btn');
+  var origText = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+
+  var payload = {
+    name: (form.name.value || '').trim(),
+    email: (form.email.value || '').trim(),
+    subject: (form.subject ? form.subject.value : '').trim(),
+    message: (form.message.value || '').trim(),
+    projectType: (form.projectType ? form.projectType.value : '').trim(),
+    budget: (form.budget ? form.budget.value : '').trim(),
+    timeline: (form.timeline ? form.timeline.value : '').trim()
+  };
+
+  fetch('/.netlify/functions/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.success) {
+      btn.textContent = 'Message Sent!';
+      btn.style.background = '#22c55e';
+      btn.style.color = '#fff';
+      btn.style.opacity = '1';
+      form.reset();
+      setTimeout(function() {
+        btn.textContent = origText;
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.style.opacity = '';
+        btn.disabled = false;
+      }, 4000);
+    } else {
+      throw new Error(data.error || 'Failed');
+    }
+  })
+  .catch(function() {
+    btn.textContent = 'Not Send';
+    btn.style.background = '#ef4444';
+    btn.style.color = '#fff';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    setTimeout(function() {
+      btn.textContent = origText;
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.style.opacity = '';
+    }, 4000);
+  });
+
+  return false;
+}
+
+// ===========================
+// THEME TOGGLE (dark / light)
+// ===========================
 const themeToggle = document.getElementById('themeToggle');
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'light') document.body.classList.add('light');
