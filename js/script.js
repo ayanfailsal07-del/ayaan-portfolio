@@ -575,47 +575,11 @@ if (stepsSection && stepsLineFill && stepEls.length) {
 }
 
 // ===========================
-// CONTACT FORM (FormSubmit.co)
+// CONTACT FORM (native POST to FormSubmit.co)
 // ===========================
-function handleContact(event) {
-  event.preventDefault();
-  var form = event.target;
-  var btn = form.querySelector('.form-btn');
-  var originalText = btn.textContent;
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-  btn.style.opacity = '0.7';
-
-  var formData = new FormData(form);
-
-  fetch(form.action, {
-    method: 'POST',
-    body: formData
-  })
-  .then(function(res) {
-    if (res.ok) {
-      btn.textContent = '✓ Message Sent!';
-      btn.style.background = '#22c55e';
-      btn.style.color = '#fff';
-      btn.style.opacity = '1';
-      form.reset();
-      setTimeout(function() {
-        btn.textContent = originalText;
-        btn.style.background = '';
-        btn.style.color = '';
-        btn.style.opacity = '';
-        btn.disabled = false;
-      }, 3500);
-    } else {
-      throw new Error('Failed');
-    }
-  })
-  .catch(function() {
-    form.submit();
-  });
-
-  return false;
-}
+// Form submits natively to https://formsubmit.co/gt.ayaan@gmail.com
+// First submission requires email verification - check inbox/spam
+// After that, all messages go directly to email
 
 // ===========================
 // THEME TOGGLE (dark / light)
