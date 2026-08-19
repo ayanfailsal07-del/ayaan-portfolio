@@ -575,75 +575,11 @@ if (stepsSection && stepsLineFill && stepEls.length) {
 }
 
 // ===========================
-// CONTACT FORM (Netlify Forms - iframe method)
+// CONTACT FORM
 // ===========================
-(function() {
-  var form = document.getElementById('contactForm');
-  if (!form) return;
-  var btn = form.querySelector('.form-btn');
-  var status = document.getElementById('formStatus');
-  var origText = btn.textContent;
-
-  var iframeName = 'formspree_iframe_' + Math.random().toString(36).substr(2);
-  var iframe = document.createElement('iframe');
-  iframe.name = iframeName;
-  iframe.style.display = 'none';
-  document.body.appendChild(iframe);
-
-  form.setAttribute('target', iframeName);
-
-  iframe.addEventListener('load', function() {
-    var success = true;
-    try {
-      var body = iframe.contentDocument || iframe.contentWindow.document;
-      if (body && body.body && body.body.textContent && body.body.textContent.indexOf('Redirect') === -1) {
-        success = true;
-      }
-    } catch(e) {
-      success = true;
-    }
-
-    btn.textContent = 'Message Sent!';
-    btn.style.background = '#22c55e';
-    btn.style.color = '#fff';
-    btn.style.opacity = '1';
-    form.reset();
-    if (status) { status.textContent = 'Message sent successfully! Check your email.'; status.className = 'form-status success'; }
-    setTimeout(function() {
-      btn.textContent = origText;
-      btn.style.background = '';
-      btn.style.color = '';
-      btn.style.opacity = '';
-      btn.disabled = false;
-      if (status) { status.textContent = ''; status.className = 'form-status'; }
-    }, 4000);
-  });
-
-  form.addEventListener('submit', function() {
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-    btn.style.opacity = '0.6';
-    if (status) { status.textContent = ''; status.className = 'form-status'; }
-
-    setTimeout(function() {
-      if (btn.textContent === 'Sending...') {
-        btn.textContent = 'Not Send';
-        btn.style.background = '#ef4444';
-        btn.style.color = '#fff';
-        btn.style.opacity = '1';
-        if (status) { status.textContent = 'Failed to send. Please try again.'; status.className = 'form-status error'; }
-        setTimeout(function() {
-          btn.textContent = origText;
-          btn.style.background = '';
-          btn.style.color = '';
-          btn.style.opacity = '';
-          btn.disabled = false;
-          if (status) { status.textContent = ''; status.className = 'form-status'; }
-        }, 4000);
-      }
-    }, 10000);
-  });
-})();
+// Form submits natively to Netlify Forms (data-netlify="true")
+// Netlify intercepts the POST, stores submission, sends email notification
+// No JavaScript needed for form submission
 
 // ===========================
 // THEME TOGGLE (dark / light)

@@ -1460,9 +1460,9 @@
         </a>
       </div>
 
-      <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+      <form class="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/thank-you.html">
         <input type="hidden" name="form-name" value="contact" />
-        <p class="hidden" style="display:none">
+        <p style="display:none">
           <label>Don't fill this out: <input name="bot-field" /></label>
         </p>
         <div class="form-row">
@@ -1477,7 +1477,6 @@
         </div>
         <input type="text" name="timeline" placeholder="Timeline (e.g. 2 weeks, flexible)" />
         <button type="submit" class="btn form-btn">Send Message</button>
-        <p class="form-status" id="formStatus"></p>
       </form>
 
     </div>
