@@ -2141,6 +2141,9 @@ img { max-width: 100%; display: block; }
 .contact-form textarea::placeholder { color: var(--text-muted); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .form-btn { margin-top: 0.5rem; border-radius: 10px; }
+.form-status { margin-top: 0.5rem; font-size: 0.9rem; text-align: center; }
+.form-status.success { color: #22c55e; }
+.form-status.error { color: #ef4444; }
 
 /* ===========================
    FOOTER

@@ -575,11 +575,64 @@ if (stepsSection && stepsLineFill && stepEls.length) {
 }
 
 // ===========================
-// CONTACT FORM (native POST to FormSubmit.co)
+// CONTACT FORM (Netlify Forms)
 // ===========================
-// Form submits natively to https://formsubmit.co/gt.ayaan@gmail.com
-// First submission requires email verification - check inbox/spam
-// After that, all messages go directly to email
+(function() {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  var btn = form.querySelector('.form-btn');
+  var status = document.getElementById('formStatus');
+  var origText = btn.textContent;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+    if (status) { status.textContent = ''; status.className = 'form-status'; }
+
+    var fd = new FormData(form);
+
+    fetch('/', {
+      method: 'POST',
+      body: fd
+    })
+    .then(function(r) {
+      if (r.ok) {
+        btn.textContent = 'Message Sent!';
+        btn.style.background = '#22c55e';
+        btn.style.color = '#fff';
+        btn.style.opacity = '1';
+        form.reset();
+        if (status) { status.textContent = 'Message sent successfully!'; status.className = 'form-status success'; }
+        setTimeout(function() {
+          btn.textContent = origText;
+          btn.style.background = '';
+          btn.style.color = '';
+          btn.style.opacity = '';
+          btn.disabled = false;
+          if (status) { status.textContent = ''; }
+        }, 4000);
+      } else {
+        throw new Error('fail');
+      }
+    })
+    .catch(function() {
+      btn.textContent = 'Not Send';
+      btn.style.background = '#ef4444';
+      btn.style.color = '#fff';
+      btn.style.opacity = '1';
+      if (status) { status.textContent = 'Failed to send. Please try again.'; status.className = 'form-status error'; }
+      setTimeout(function() {
+        btn.textContent = origText;
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.style.opacity = '';
+        btn.disabled = false;
+      }, 4000);
+    });
+  });
+})();
 
 // ===========================
 // THEME TOGGLE (dark / light)
