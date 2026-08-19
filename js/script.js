@@ -573,17 +573,6 @@ if (stepsSection && stepsLineFill && stepEls.length) {
   }, { threshold: 0.3 });
   stepObserver.observe(stepsSection);
 }
-
-// ===========================
-// CONTACT FORM
-// ===========================
-// Form submits natively to Netlify Forms (data-netlify="true")
-// Netlify intercepts the POST, stores submission, sends email notification
-// No JavaScript needed for form submission
-
-// ===========================
-// THEME TOGGLE (dark / light)
-// ===========================
 const themeToggle = document.getElementById('themeToggle');
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'light') document.body.classList.add('light');
