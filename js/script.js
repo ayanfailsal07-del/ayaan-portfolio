@@ -575,7 +575,7 @@ if (stepsSection && stepsLineFill && stepEls.length) {
 }
 
 // ===========================
-// CONTACT FORM (Web3Forms)
+// CONTACT FORM (FormSubmit.co)
 // ===========================
 function handleContact(event) {
   event.preventDefault();
@@ -592,9 +592,8 @@ function handleContact(event) {
     method: 'POST',
     body: formData
   })
-  .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
-  .then(function(result) {
-    if (result.ok && result.data.success) {
+  .then(function(res) {
+    if (res.ok) {
       btn.textContent = '✓ Message Sent!';
       btn.style.background = '#22c55e';
       btn.style.color = '#fff';
@@ -608,16 +607,11 @@ function handleContact(event) {
         btn.disabled = false;
       }, 3500);
     } else {
-      throw new Error(result.data.message || 'Failed');
+      throw new Error('Failed');
     }
   })
   .catch(function() {
-    btn.textContent = 'Failed — Tap to retry';
-    btn.style.opacity = '1';
-    btn.disabled = false;
-    setTimeout(function() {
-      btn.textContent = originalText;
-    }, 3000);
+    form.submit();
   });
 
   return false;
