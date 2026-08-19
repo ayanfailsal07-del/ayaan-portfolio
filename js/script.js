@@ -575,7 +575,7 @@ if (stepsSection && stepsLineFill && stepEls.length) {
 }
 
 // ===========================
-// CONTACT FORM (Netlify Function)
+// CONTACT FORM (Web3Forms)
 // ===========================
 function handleContact(event) {
   event.preventDefault();
@@ -586,20 +586,11 @@ function handleContact(event) {
   btn.disabled = true;
   btn.style.opacity = '0.7';
 
-  var payload = {
-    name: (form.name.value || '').trim(),
-    email: (form.email.value || '').trim(),
-    subject: (form.subject.value || '').trim(),
-    message: (form.message.value || '').trim(),
-    projectType: (form.project ? form.project.value : '').trim(),
-    budget: (form.budget ? form.budget.value : '').trim(),
-    timeline: (form.timeline ? form.timeline.value : '').trim()
-  };
+  var formData = new FormData(form);
 
-  fetch('/.netlify/functions/contact', {
+  fetch(form.action, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
+    body: formData
   })
   .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
   .then(function(result) {
@@ -617,7 +608,7 @@ function handleContact(event) {
         btn.disabled = false;
       }, 3500);
     } else {
-      throw new Error(result.data.error || 'Failed');
+      throw new Error(result.data.message || 'Failed');
     }
   })
   .catch(function() {

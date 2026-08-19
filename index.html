@@ -1460,15 +1460,19 @@
         </a>
       </div>
 
-      <form class="contact-form" name="contact" id="contactForm" onsubmit="return handleContact(event)">
+      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+        <input type="hidden" name="subject" value="New Portfolio Contact Message" />
+        <input type="hidden" name="from_name" value="Ayaan Portfolio" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" />
         <div class="form-row">
           <input type="text" name="name" placeholder="Your Name" required />
           <input type="email" name="email" placeholder="Your Email" required />
         </div>
-        <input type="text" name="subject" placeholder="Subject" />
+        <input type="text" name="topic" placeholder="Subject" />
         <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
         <div class="form-row">
-          <input type="text" name="project" placeholder="Project Type (e.g. Website, App)" />
+          <input type="text" name="project_type" placeholder="Project Type (e.g. Website, App)" />
           <input type="text" name="budget" placeholder="Budget Range" />
         </div>
         <input type="text" name="timeline" placeholder="Timeline (e.g. 2 weeks, flexible)" />
