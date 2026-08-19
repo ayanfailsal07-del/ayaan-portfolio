@@ -1460,11 +1460,7 @@
         </a>
       </div>
 
-      <form class="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" onsubmit="return handleContact(event)">
-        <input type="hidden" name="form-name" value="contact" />
-        <p class="hidden" style="display:none">
-          <label>Don't fill this out: <input name="bot-field" /></label>
-        </p>
+      <form class="contact-form" name="contact" id="contactForm" onsubmit="return handleContact(event)">
         <div class="form-row">
           <input type="text" name="name" placeholder="Your Name" required />
           <input type="email" name="email" placeholder="Your Email" required />

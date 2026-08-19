@@ -575,73 +575,61 @@ if (stepsSection && stepsLineFill && stepEls.length) {
 }
 
 // ===========================
-// CONTACT FORM (Netlify Forms + fallback)
+// CONTACT FORM (Netlify Function)
 // ===========================
 function handleContact(event) {
   event.preventDefault();
-  const form = event.target;
-  const btn = form.querySelector('.form-btn');
-  const originalText = btn.textContent;
+  var form = event.target;
+  var btn = form.querySelector('.form-btn');
+  var originalText = btn.textContent;
   btn.textContent = 'Sending...';
   btn.disabled = true;
+  btn.style.opacity = '0.7';
 
-  const formData = new FormData(form);
-  const body = new URLSearchParams(formData).toString();
+  var payload = {
+    name: (form.name.value || '').trim(),
+    email: (form.email.value || '').trim(),
+    subject: (form.subject.value || '').trim(),
+    message: (form.message.value || '').trim(),
+    projectType: (form.project ? form.project.value : '').trim(),
+    budget: (form.budget ? form.budget.value : '').trim(),
+    timeline: (form.timeline ? form.timeline.value : '').trim()
+  };
 
-  fetch('/', {
+  fetch('/.netlify/functions/contact', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: body
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
   })
-  .then(function(res) {
-    if (res.ok) {
-      showFormSuccess(form, btn, originalText);
+  .then(function(res) { return res.json().then(function(d) { return { ok: res.ok, data: d }; }); })
+  .then(function(result) {
+    if (result.ok && result.data.success) {
+      btn.textContent = '✓ Message Sent!';
+      btn.style.background = '#22c55e';
+      btn.style.color = '#fff';
+      btn.style.opacity = '1';
+      form.reset();
+      setTimeout(function() {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.style.opacity = '';
+        btn.disabled = false;
+      }, 3500);
     } else {
-      throw new Error('Server error ' + res.status);
+      throw new Error(result.data.error || 'Failed');
     }
   })
   .catch(function() {
-    fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: form.name.value.trim(),
-        email: form.email.value.trim(),
-        subject: form.subject.value.trim(),
-        message: form.message.value.trim(),
-        projectType: (form.project.value || '').trim(),
-        budget: (form.budget.value || '').trim(),
-        timeline: (form.timeline.value || '').trim()
-      })
-    })
-    .then(function(res) {
-      if (res.ok) {
-        showFormSuccess(form, btn, originalText);
-      } else {
-        throw new Error('Fallback failed');
-      }
-    })
-    .catch(function() {
-      btn.textContent = 'Failed - Try Again';
-      btn.disabled = false;
-      setTimeout(function() { btn.textContent = originalText; }, 2500);
-    });
+    btn.textContent = 'Failed — Tap to retry';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    setTimeout(function() {
+      btn.textContent = originalText;
+    }, 3000);
   });
 
   return false;
-}
-
-function showFormSuccess(form, btn, originalText) {
-  btn.textContent = 'Message Sent!';
-  btn.style.background = '#22c55e';
-  btn.style.color = '#fff';
-  form.reset();
-  setTimeout(function() {
-    btn.textContent = originalText;
-    btn.style.background = '';
-    btn.style.color = '';
-    btn.disabled = false;
-  }, 3000);
 }
 
 // ===========================
