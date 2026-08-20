@@ -796,6 +796,7 @@ img { max-width: 100%; display: block; }
 .lg-ts { background: #3178C6; }
 .lg-react { background: #61DAFB; color: #111; }
 .lg-mongo { background: #47A248; }
+.tech-slider .slider-btns { margin-top: 0.8rem; }
 .tech-dots {
   display: flex;
   justify-content: center;
