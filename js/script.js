@@ -575,7 +575,7 @@ if (stepsSection && stepsLineFill && stepEls.length) {
 }
 
 // ===========================
-// CONTACT FORM (Netlify Function - Gmail SMTP)
+// CONTACT FORM (FormSubmit.co - Direct Email)
 // ===========================
 function handleContact(event) {
   event.preventDefault();
@@ -593,12 +593,15 @@ function handleContact(event) {
     message: (form.message.value || '').trim(),
     projectType: (form.projectType ? form.projectType.value : '').trim(),
     budget: (form.budget ? form.budget.value : '').trim(),
-    timeline: (form.timeline ? form.timeline.value : '').trim()
+    timeline: (form.timeline ? form.timeline.value : '').trim(),
+    _subject: 'Portfolio: ' + ((form.subject ? form.subject.value : '').trim() || 'New Contact Message'),
+    _captcha: 'false',
+    _template: 'table'
   };
 
-  fetch('/.netlify/functions/contact', {
+  fetch('https://formsubmit.co/ajax/ayanfailsal07@gmail.com', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
     body: JSON.stringify(payload)
   })
   .then(function(r) { return r.json(); })
@@ -617,7 +620,7 @@ function handleContact(event) {
         btn.disabled = false;
       }, 4000);
     } else {
-      throw new Error(data.error || 'Failed');
+      throw new Error(data.message || 'Failed');
     }
   })
   .catch(function() {
